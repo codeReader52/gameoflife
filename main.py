@@ -1,25 +1,4 @@
 from Cell import Cell
+from Simulation import createGridWorld
 
-cell0 = Cell(0, 0, False, [])
-cell1 = Cell(0, 1, False, [])
-cell2 = Cell(0, 2, True, [])
-cell3 = Cell(1, 0, True, [])
-cell4 = Cell(1, 1, True, [])
-cell5 = Cell(1, 2, True, [])
-cell6 = Cell(2, 0, False, [])
-cell7 = Cell(2, 1, False, [])
-cell8 = Cell(2, 2, False, [])
-
-cell4.addNeighbour(cell0)
-cell4.addNeighbour(cell1)
-cell4.addNeighbour(cell2)
-cell4.addNeighbour(cell3)
-cell4.addNeighbour(cell5)
-cell4.addNeighbour(cell6)
-cell4.addNeighbour(cell7)
-cell4.addNeighbour(cell8)
-
-print(cell4.isUnderPopulated())
-print(cell4.canLiveOn())
-print(cell4.isOverPopulated())
-print(cell4.isRevived())
+world = createGridWorld(20, 20)

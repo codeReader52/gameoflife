@@ -1,16 +1,18 @@
-def simulate(width, height):
-    # to build up width * height cells
-    x = 0
-    y = 0
-    while x < width:
-        print(x, 0)
-        x += 1
-
-    while y < height:
-        print(0, y)
-        y += 1
-        
-    
+from Cell import Cell
 
 
-simulate(3, 3)
+def createGridWorld(width, height):
+    theWorld = []
+
+    outterIndex = 0
+    while outterIndex < width:
+        innerIndex = 0
+        row = []
+        while innerIndex < height:
+            row.append(Cell(innerIndex, outterIndex, False, []))
+            innerIndex += 1
+
+        theWorld.append(row)
+        outterIndex += 1
+
+    return theWorld
