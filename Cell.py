@@ -1,3 +1,10 @@
+import pygame
+
+great_depression= [194, 178, 178]
+b = [34, 5, 252]
+great_money = [98, 252, 3]
+
+
 class Cell:
 
     def __init__(self, x, y, is_alive, neighbours=[]):
@@ -9,6 +16,14 @@ class Cell:
     def print(self):
         print(self.x, self.y, self.isAlive)
 
+    def draw(self,screen):
+        colour = great_depression
+        if self.isAlive:
+            colour = b
+            
+        pygame.draw.rect(screen, colour, pygame.Rect(10*self.x,10*self.y,10,10))
+        pygame.draw.rect(screen, great_money, pygame.Rect(10*self.x,10*self.y,10,10),1)
+            
     def addNeighbour(self, neighbour):
         self.neighbours.append(neighbour)
 
