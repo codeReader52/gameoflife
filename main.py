@@ -30,8 +30,12 @@ while running:
         if event.type == pygame.QUIT:
             running =False    
         if event.type == pygame.MOUSEBUTTONDOWN:
-            clickPos = event.pos
+            mousepos = pygame.mouse.get_pos()
+            col_index = int(mousepos[0] / 10)
+            row_index = int(mousepos[1] / 10)
 
+            cells[row_index][col_index].isAlive = True
+            
         eventi = eventi + 1
 
     # Drawing graphics
