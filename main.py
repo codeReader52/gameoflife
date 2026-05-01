@@ -17,9 +17,15 @@ great_money = [98, 252, 3]
 
 index = 0
 running = True
-cells = createGridWorld(800/ 10, 800 / 10)
-cells[0][0].isAlive = True
+# cells = createGridWorld(800/ 10, 800 / 10)
 
+cells = createGridWorld(5, 5)
+# (3, 4) -> cells[3][4]
+
+# Iterate through each row in cells
+# For each row, iterate through each cell
+# Access the cell by index
+# For each of the cell, print out all indices of neighbours
 
 while running:
     # Handle user events
