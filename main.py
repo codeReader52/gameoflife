@@ -55,6 +55,22 @@ while indexr < len(cells):
 
     indexr += 1
 
+print('neighbour index:')
+indexr = 0
+while indexr < len(cells):
+    row = cells[indexr]
+    indexc = 0
+    while indexc < len(row):
+        ni = 0
+        cell = row[indexc]
+        while ni < len(cell.neighbours):
+            neighbour = cell.neighbours[ni]
+            print(neighbour.x, neighbour.y)
+            ni += 1
+        indexc += 1
+        print('---------------------------------')
+    indexr += 1
+
 # (3, 4) -> cells[3][4]
 
 # Iterate through each row in cells
