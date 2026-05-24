@@ -16,7 +16,7 @@ class Cell:
     def print(self):
         print(self.x, self.y, self.isAlive)
 
-    def draw(self,screen):
+    def draw(self, screen):
         colour = great_depression
         if self.isAlive:
             colour = b
