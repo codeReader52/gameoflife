@@ -19,11 +19,32 @@ index = 0
 running = True
 cells = createGridWorld(50, 50)
 
-# Iterate through each row in cells
-# For each row, iterate through each cell
-# Access the cell by index
-# For each of the cell, print out all indices of neighbours
+i = 0
+while i < len(cells):
+    row = cells[i]
+    j = 0
+    while j < len(row):
+        currentcell = cells[i][j]
+        if i - 1 >= 0 and i - 1 < len(cells) and j - 1 >= 0 and j - 1 < len(row):
+            currentcell.addNeighbour(cells[i-1][j-1])
+        if i - 1 >= 0 and i - 1 < len(cells) and j >= 0 and j < len(row):
+            currentcell.addNeighbour(cells[i-1][j])
+        if i - 1 >= 0 and i - 1 < len(cells) and j + 1 >= 0 and j + 1 < len(row):
+            currentcell.addNeighbour(cells[i-1][j+1])
+        if i >= 0 and i < len(cells) and j - 1 >= 0 and j - 1 < len(row):
+            currentcell.addNeighbour(cells[i][j-1])
+        if i >= 0 and i < len(cells) and j + 1 >= 0 and j + 1 < len(row):
+            currentcell.addNeighbour(cells[i][j+1])
+        if i + 1 >= 0 and i + 1 < len(cells) and j - 1 >= 0 and j - 1 < len(row):
+            currentcell.addNeighbour(cells[i+1][j-1])
+        if i + 1 >= 0 and i + 1 < len(cells) and j >= 0 and j < len(row):
+            currentcell.addNeighbour(cells[i+1][j])
+        if i + 1 >= 0 and i + 1 < len(cells) and j + 1 >= 0 and j + 1 < len(row):
+            currentcell.addNeighbour(cells[i+1][j+1])
 
+        j += 1
+        
+    i += 1
 
 while running:
     # Handle user events
