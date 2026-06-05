@@ -79,8 +79,33 @@ while running:
 
                 cells[row_index][col_index].isAlive = True
 
-            
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_s:
+                startSimulation = True
+                print("Start simulation!!")
+                
         eventi = eventi + 1
+
+    if startSimulation:
+        indexr = 0
+        while indexr < len(cells):
+            indexc = 0
+            row = cells[indexr]
+            while indexc < len(row):
+                cell = cells[indexr][indexc]
+                if cell.isAlive:
+                    if cell.canLiveOn():
+                        pass
+                    elif cell.isUnderPopulated():
+                        cell.isAlive = False
+                    else:
+                        cell.isAlive = False
+                else:
+                    if cell.isRevived():
+                        cell.isAlive = True
+
+                indexc += 1
+            indexr += 1
 
     # Drawing graphics
     screen.fill(blue)
