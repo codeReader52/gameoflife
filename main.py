@@ -17,96 +17,81 @@ green = [98, 252, 3]
 
 index = 0
 running = True
-# cells = createGridWorld(800/ 10, 800 / 10)
-
-cells = createGridWorld(5, 5)
+cells = createGridWorld(800/ 10, 800 / 10)
 indexr = 0
 
 while indexr < len(cells):
     row = cells[indexr]
     indexc = 0
     while indexc <len(row):
+        cell = row[indexc]
+
         if indexr - 1 >= 0 and indexr - 1 < len(cells) and indexc - 1 >= 0 and indexc - 1 < len(row):
-            print(indexr-1, indexc-1)
+            cell.addNeighbour(cells[indexr-1][indexc-1])
 
         if indexr - 1 >= 0 and indexr - 1 < len(cells) and indexc >= 0 and indexc < len(row):
-            print(indexr - 1, indexc)
+            cell.addNeighbour(cells[indexr-1][indexc])
 
         if indexr - 1 >= 0 and indexr - 1 < len(cells) and indexc + 1 >= 0 and indexc + 1 < len(row):
-            print(indexr-1, indexc+1)
+            cell.addNeighbour(cells[indexr-1][indexc+1])
 
         if indexr >= 0 and indexr < len(cells) and indexc - 1 >= 0 and indexc - 1 < len(row):
-            print(indexr, indexc-1)
+            cell.addNeighbour(cells[indexr][indexc-1])
 
         if indexr >= 0 and indexr < len(cells) and indexc + 1 >= 0 and indexc + 1 < len(row):
-            print(indexr, indexc + 1)
+            cell.addNeighbour(cells[indexr][indexc+1])
         
         if indexr + 1 >= 0 and indexr + 1 < len(cells) and indexc - 1 >= 0 and indexc - 1 < len(row):
-            print(indexr+1, indexc-1)
+            cell.addNeighbour(cells[indexr+1][indexc-1])
 
         if indexr + 1 >= 0 and indexr + 1 < len(cells) and indexc >= 0 and indexc < len(row):
-            print(indexr+1, indexc)
+            cell.addNeighbour(cells[indexr+1][indexc])
 
         if indexr + 1 >= 0 and indexr + 1 < len(cells) and indexc + 1 >= 0 and indexc + 1 < len(row):
-            print(indexr+1, indexc+1)
+            cell.addNeighbour(cells[indexr+1][indexc+1])
 
-        print('-----------------------------------------------')
         indexc += 1
 
     indexr += 1
 
-print('neighbour index:')
-indexr = 0
-while indexr < len(cells):
-    row = cells[indexr]
-    indexc = 0
-    while indexc < len(row):
-        ni = 0
-        cell = row[indexc]
-        while ni < len(cell.neighbours):
-            neighbour = cell.neighbours[ni]
-            print(neighbour.x, neighbour.y)
-            ni += 1
-        indexc += 1
-        print('---------------------------------')
-    indexr += 1
+startSimulation = False
 
-# (3, 4) -> cells[3][4]
+while running:
+    # Handle user events
+    eventl = pygame.event.get()
+    eventi= 0
+    while eventi <len (eventl):
+        event = eventl[eventi]
+        if event.type == pygame.QUIT:
+            running =False    
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            mousepos = pygame.mouse.get_pos()
+            col_index = int(mousepos[0] / 10)
+            row_index = int(mousepos[1] / 10)
 
-# Iterate through each row in cells
-# For each row, iterate through each cell
-# Access the cell by index
-# For each of the cell, print out all indices of neighbours
+            cells[row_index][col_index].isAlive = True
 
+        if event.type == pygame.MOUSEMOTION:
+            if pygame.mouse.get_pressed()[0]:
+                mousepos = pygame.mouse.get_pos()
+                col_index = int(mousepos[0] / 10)
+                row_index = int(mousepos[1] / 10)
 
+                cells[row_index][col_index].isAlive = True
 
-# while running:
-#     # Handle user events
-#     eventl = pygame.event.get()
-#     eventi= 0
-#     while eventi <len (eventl):
-#         event = eventl[eventi]
-#         if event.type == pygame.QUIT:
-#             running =False    
-#         if event.type == pygame.MOUSEBUTTONDOWN:
-#             mousepos = pygame.mouse.get_pos()
-#             col_index = int(mousepos[0] / 10)
-#             row_index = int(mousepos[1] / 10)
-
-#             cells[row_index][col_index].isAlive = True
             
-#         eventi = eventi + 1
+        eventi = eventi + 1
 
-#     # Drawing graphics
-#     screen.fill(blue)
-#     index = 0
-#     while index < len(cells):
-#         tndex = 0
-#         row =cells[index]
-#         while tndex <len(row):
-#             cell = row[tndex]
-#             cell.draw(screen)
-#             tndex += 1
-#         index +=1
+    # Drawing graphics
+    screen.fill(blue)
+    index = 0
+    while index < len(cells):
+        tndex = 0
+        row =cells[index]
+        while tndex <len(row):
+            cell = row[tndex]
+            cell.draw(screen)
+            tndex += 1
+        index +=1
 
-#     pygame.display.update()
+    pygame.display.update()
