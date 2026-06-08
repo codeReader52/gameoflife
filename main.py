@@ -17,7 +17,7 @@ green = [98, 252, 3]
 
 index = 0
 running = True
-cells = createGridWorld(50, 50)
+cells = createGridWorld(80, 80)
 
 i = 0
 while i < len(cells):
@@ -46,6 +46,8 @@ while i < len(cells):
         
     i += 1
 
+startSimulation = False
+
 while running:
     # Handle user events
     eventl = pygame.event.get()
@@ -54,6 +56,10 @@ while running:
         event = eventl[eventi]
         if event.type == pygame.QUIT:
             running =False
+
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_s:
+                startSimulation = True
 
         if event.type == pygame.MOUSEBUTTONDOWN:
             mousepos = pygame.mouse.get_pos()
@@ -89,6 +95,27 @@ while running:
                 cells[row_index][col_index].isAlive = False
             
         eventi = eventi + 1
+
+    if startSimulation:
+        index = 0
+        while index < len(cells):
+            row = cells[index]
+            index2 = 0
+            while index2 < len(row):
+                cell = row[index2]
+                if cell.isAlive:
+                    if cell.isUnderPopulated():
+                        cell.isAlive = False
+                    elif cell.isOverPopulated():
+                        cell.isAlive = False
+                    else:
+                        pass    
+                else:
+                    if cell.isRevived():
+                        cell.isAlive = True
+                index2 += 1
+
+            index += 1
 
     # Drawing graphics
     screen.fill(blue)
