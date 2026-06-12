@@ -1,4 +1,14 @@
-import pygame 
+import pygame
+from datetime import datetime
+
+lastTime = datetime.now()
+def hasItBeen(seconds):
+    global lastTime
+    now = datetime.now()
+    if (now - lastTime).total_seconds() > seconds:
+        lastTime = now
+        return True
+    return False
 
 pygame.init()
 
@@ -25,6 +35,14 @@ while running:
                 elements.append(pygame.mouse.get_pos())
                 print(elements)
         ind1 += 1
+
+    if hasItBeen(0.01):
+        index = 0
+        while index < len(elements):
+            center = elements[index]
+            center2 = (center[0], center[1] + 5)
+            elements[index] = center2
+            index += 1
 
     screen.fill(blue)
     index = 0
