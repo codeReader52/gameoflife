@@ -26,7 +26,7 @@ circles = []
 index = 0
 while index < 500:
     random_color = [random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)]
-    circle = Circle(random.randint(0, max_w), random.randint(0, max_h), circle_radius, random_color, screen)
+    circle = Circle(random.randint(0, max_w), random.randint(0, max_h), circle_radius, random_color, screen, max_w, max_h)
     circles.append(circle)
     index += 1
 
@@ -53,24 +53,26 @@ while True:
             while index < len(circles): 
                 circle = circles[index]
                 # Make the circle move randomly, but maximally -10 to the left and 10 to the right, -10 up and 10 down
-                # circle.update_position(random.randint(-10, 10), random.randint(-10, 10))
-                dx, dy = random.randint(-10, 10), random.randint(-10, 10)
-                x, y = circle.x, circle.y
-                if x + dx < 0:
-                    x = abs(x + dx)
-                elif x + dx > max_w:
-                    x = 2 * max_w - x - dx
-                else:
-                    x = x + dx
+                dx, dy = random.randint(-100, 100), random.randint(-100, 100)
 
-                if y + dy < 0:
-                    y = abs(y + dy)
-                elif y + dy > max_h:
-                    y = 2 * max_h - y - dy
-                else:
-                    y = y + dy
+                circle.update_position(dx, dy)
 
-                circle.x, circle.y = x, y
+                # x, y = circle.x, circle.y
+                # if x + dx < 0:
+                #     x = abs(x + dx)
+                # elif x + dx > max_w:
+                #     x = 2 * max_w - x - dx
+                # else:
+                #     x = x + dx
+
+                # if y + dy < 0:
+                #     y = abs(y + dy)
+                # elif y + dy > max_h:
+                #     y = 2 * max_h - y - dy
+                # else:
+                #     y = y + dy
+
+                # circle.x, circle.y = x, y
                 index += 1
                 
     screen.fill((255, 255, 255))
